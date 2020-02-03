@@ -63,7 +63,7 @@ class LogCollector(object):
         '''Sends collected log lines to http endpoint specified in config.'''
         data = ''.join(self._files[file_idx][1])
 
-        res = requests.post(self.config[file_idx]["endpoint"], data=data)
+        res = requests.post(self.config[file_idx]["endpoint"], data=data.encode('utf-8'))
         if res.status_code == 200:
             self.reset_lines(file_idx)
             print(f'Sent to http endpoint {self.config[file_idx]["endpoint"]}.')
